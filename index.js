@@ -1,4 +1,5 @@
 const express = require("express");
+require("dotenv").config();
 const cors = require("cors");
 const routes = require("./routes/user");
 // create our express app
@@ -17,6 +18,6 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log("listening at port" + port);
 });
-/* app.get("*", (req, res) => {
+app.get("*", (req, res) => {
   res.send("not found");
-}); */
+});

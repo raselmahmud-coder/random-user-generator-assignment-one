@@ -1,4 +1,5 @@
 const express = require("express");
+const deleteUser = require("../controllers/deleteUser");
 const getAllUsers = require("../controllers/getAllUsers");
 const getRandomUser = require("../controllers/getRandomUser");
 const saveUser = require("../controllers/saveUser");
@@ -32,7 +33,6 @@ router.post("/save", async (req, res) => {
 });
 router.patch("/update/:id", (req, res) => {
   const { id } = req.params;
-  // console.log(id);
   const user = req.body;
   if (id) {
     const newUser = { id: Number(id) };
@@ -50,4 +50,17 @@ router.patch("/update/:id", (req, res) => {
     res.status(400).send("User id is required");
   }
 });
+router.delete("/delete/:id", (req, res) => {
+  const { id } = req.params;
+  if (id) {
+    if (deleteUser(id)) {
+      res.status(200).send("user deleted");
+    } else {
+      res.status(400).send("bad request");
+    }
+  } else {
+    res.status(400).send("User id is required");
+  }
+});
+
 module.exports = router;
