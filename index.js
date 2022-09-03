@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/user", routes);
 //start server
 app.get("/", (req, res) => {
-  res.statusCode(404).send("Hello World! from user route");
+  res.send("Server is running");
 });
 app.listen(port, () => {
   console.log("listening at port" + port);
