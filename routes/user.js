@@ -62,5 +62,21 @@ router.delete("/delete/:id", (req, res) => {
     res.status(400).send("User id is required");
   }
 });
+router.post("/bulk-update", (req, res) => {
+    const {users} = req.body;
+    console.log(users.users);
+  // expected users = [{id:1, name:"name"}, {id:2, name:"name"}]
+  if (users.length > 0) {
+    users.forEach((user) => {
+      if (updateUser(user) === null) {
+        res.status(400).send("bad request");
+      } else {
+        res.status(200).send("users updated");
+      }
+    });
+  } else {
+    res.status(400).send("bad request");
+  }
+});
 
 module.exports = router;
